@@ -1,0 +1,103 @@
+Script started on Fri Nov 11 19:05:40 2016
+% cat hw10.c
+/************************************************************************************************
+*Zachary Davis
+*CS125
+*Assignment #10
+*
+*Summary:
+*This program has the user enter a set of elements and the program determines where the scanf 
+*would stop, number of whitespace and the value of the integer the user entered or an error
+*if not an interger. 
+***********************************************************************************************/
+
+# include<stdio.h>
+void miniScanf (int *elementPointer);
+
+main ()
+{
+  int userInput = 0;
+  printf ("Enter an integer: ");
+  miniScanf (&userInput);
+  printf ("\nMain's integer (printed with a %%d) is now %d \n\n", userInput);
+}
+
+void
+miniScanf (int *elementPointer)
+{
+  int whiteSpaceCount = 0, scanCount = 0;
+  char inputedChar;
+
+/******************************************************************
+*All the if statments account for all the conditions for the code.
+*Counts only whitespace for one if, only storing userInput with
+*a pointer if it is an integer with another if statment and finally 
+*an if statment to print the error message if conditions are meet.
+*******************************************************************/
+
+  do
+    {
+      scanf ("%c", &inputedChar);
+
+      if ((inputedChar >= '0') && (inputedChar <= '9'))
+	{
+	  *elementPointer *= 10;
+	  *elementPointer += (inputedChar - 48);
+	}
+
+      if (((inputedChar == ' ') || (inputedChar == '\t')
+	   || (inputedChar == '\n')) && (*elementPointer == 0))
+	whiteSpaceCount++;
+      scanCount++;
+    }
+  while ((((inputedChar == ' ') || (inputedChar == '\t')
+	   || (inputedChar == '\n')) && (*elementPointer == 0))
+	 || ((inputedChar >= '0') && (inputedChar <= '9')));
+
+  printf ("\nSkipped over %d characters of white space\n", whiteSpaceCount);
+  if ((inputedChar != '\n') && (*elementPointer == 0))
+    printf
+      ("\nError, scan terminated by non-whitespace, non-digit before any digits encountered\n");
+  printf
+    ("\nStopped scanning after %d characters (including the leading whitespace, if any), last\ncharacter read that stopped the scan was a '%c' (%#x), which, for the real\nscanf, would be left in the keystroke buffer",
+     scanCount, inputedChar, inputedChar);
+}
+% gcc125 hw10.c
+% gcc125 hw10.c[13Dcat hw10.c[K[10Dexit[K script[7D[K% cat hw10.c[10Dgcc125 hw10.c[13D[Ka.out 10[K[Khw10.c
+Enter an integer:   56*
+
+Skipped over 2 characters of white space
+
+Stopped scanning after 5 characters (including the leading whitespace, if any), last
+character read that stopped the scan was a '*' (0x2a), which, for the real
+scanf, would be left in the keystroke buffer
+Main's integer (printed with a %d) is now 56 
+
+% a.out hw10.c
+Enter an integer: 
+bah 45
+
+Skipped over 1 characters of white space
+
+Error, scan terminated by non-whitespace, non-digit before any digits encountered
+
+Stopped scanning after 2 characters (including the leading whitespace, if any), last
+character read that stopped the scan was a 'b' (0x62), which, for the real
+scanf, would be left in the keystroke buffer
+Main's integer (printed with a %d) is now 0 
+
+% a.out hw10.c
+Enter an integer: 		2473
+
+Skipped over 2 characters of white space
+
+Stopped scanning after 7 characters (including the leading whitespace, if any), last
+character read that stopped the scan was a '
+' (0xa), which, for the real
+scanf, would be left in the keystroke buffer
+Main's integer (printed with a %d) is now 2473 
+
+% exit
+exit
+
+Script done on Fri Nov 11 19:07:19 2016
