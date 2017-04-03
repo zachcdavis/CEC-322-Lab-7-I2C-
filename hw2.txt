@@ -1,0 +1,70 @@
+Script started on Thu Sep  8 15:18:05 2016
+% cat hw2.c
+/*Zachary Davis
+CS 125
+Assignment #2 
+Program that has user enter as many integers as they want.
+Program displays how many intetegers were eneter, amount 
+of negative numbers and positive numbers, largest value 
+entered and, lowest integer entered.*/
+# include<stdio.h>
+main()
+{
+int input,countneg,countpos,addcounts,low,high;
+countneg=0;
+countpos=0;
+printf("Enter an integer (zero terminates this program):");
+scanf("%d", & input);
+if ( input < 0 )
+  countneg = countneg + 1;
+else if (input > 0)
+  countpos = countpos + 1;
+low = input;
+high = input;
+do
+{
+printf("Enter an integer (zero terminates this program):");
+scanf("%d", & input);
+if (input != 0)
+  {
+  if (input < low)
+    low = input;
+  if (input > high)
+    high = input;	
+  if (input < 0)
+    countneg = countneg + 1;
+  if (input > 0)
+    countpos = countpos + 1;
+  }
+}while ( input != 0);
+addcounts= countneg + countpos;
+printf("You entered %d non-zero integers; %d were positive, %d were negative.\nThe largest value you entered %d; the smallest was %d\n",addcounts,countpos,countneg,high,low);
+}
+% cat hw2.c[9Da.out hw2.c
+Enter an integer (zero terminates this program):5
+Enter an integer (zero terminates this program):-3
+Enter an integer (zero terminates this program):7
+Enter an integer (zero terminates this program):-2
+Enter an integer (zero terminates this program):0
+You entered 4 non-zero integers; 2 were positive, 2 were negative.
+The largest value you entered 7; the smallest was -3
+% a.out hw2.c
+Enter an integer (zero terminates this program):5
+Enter an integer (zero terminates this program):10
+Enter an integer (zero terminates this program):15
+Enter an integer (zero terminates this program):20
+Enter an integer (zero terminates this program):0
+You entered 4 non-zero integers; 4 were positive, 0 were negative.
+The largest value you entered 20; the smallest was 5
+% a.out hw2.c
+Enter an integer (zero terminates this program):-1
+Enter an integer (zero terminates this program):-2
+Enter an integer (zero terminates this program):-3
+Enter an integer (zero terminates this program):-4
+Enter an integer (zero terminates this program):0
+You entered 4 non-zero integers; 0 were positive, 4 were negative.
+The largest value you entered -1; the smallest was -4
+% exit
+exit
+
+Script done on Thu Sep  8 15:19:15 2016
