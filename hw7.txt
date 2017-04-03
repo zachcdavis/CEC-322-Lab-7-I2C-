@@ -1,0 +1,47 @@
+Script started on Thu Oct 13 15:20:28 2016
+% cat hw7.c
+/**********************************************************************************************
+*Zachary Davis
+*CS125
+*Assignment #7
+*
+*Summary:
+* This program calculates a random number between a lower and upper limit that the user enters.
+***********************************************************************************************/
+
+# include<stdio.h>
+# include<stdlib.h>
+
+float
+randomBetween (float lowerLimit, float upperLimit)
+{
+  return ((((float) rand () / (float) RAND_MAX) * (upperLimit - lowerLimit)) +
+	  lowerLimit);
+}
+
+/*************************************************************************************
+*Adjust scale of random number with our scale  with upperLimit-lowerLimit. 
+*Adjust random to lower bound with +lowerLimit in order for random to be in our range.
+**************************************************************************************/
+
+main ()
+{
+  float lowerLimit, upperLimit;
+  printf ("Enter lower and upper limits separated by a comma: ");
+  scanf ("%g, %g", &lowerLimit, &upperLimit);
+  printf ("\n   Your random number is %f\n",
+	  randomBetween (lowerLimit, upperLimit));
+}
+% gcc125 hw7.c
+% a.out hw7.c
+Enter lower and upper limits separated by a comma: -1.0, +2.0
+
+   Your random number is 1.520563
+% [K% a.out hw7.c
+Enter lower and upper limits separated by a comma: -1e0, 2.0E0
+
+   Your random number is 1.520563
+% exit
+exit
+
+Script done on Thu Oct 13 15:22:06 2016
