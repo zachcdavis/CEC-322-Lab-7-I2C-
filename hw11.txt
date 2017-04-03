@@ -1,0 +1,64 @@
+Script started on Fri Nov 18 20:52:01 2016
+% cat hw11.c
+/******************************************************************************
+*Zachary Davis
+*CS125
+*Assignment #11
+*
+*Summary:
+*This program has main declare a triangle and fill in is vertices with 
+*random floating numbers. Program also prints out the centroid of the triangle.
+******************************************************************************/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+float centroid (float coordinate1, float coordinate2, float coordinate3);
+
+typedef struct twoDemPoint
+{
+  float x, y;
+} twoDemPoint;
+
+typedef struct triangle
+{
+  twoDemPoint array[3];
+} trianglePoints;
+
+main ()
+{
+  trianglePoints triangleCord;
+  triangleCord.array[0].x = (float) rand () / RAND_MAX;
+  triangleCord.array[0].y = (float) rand () / RAND_MAX;
+  triangleCord.array[1].x = (float) rand () / RAND_MAX;
+  triangleCord.array[1].y = (float) rand () / RAND_MAX;
+  triangleCord.array[2].x = (float) rand () / RAND_MAX;
+  triangleCord.array[2].y = (float) rand () / RAND_MAX;
+
+  printf
+    ("The triangle vertices are [%4.2f, %4.2f], [%4.2f, %4.2f], and [%4.2f, %4.2f]\n",
+     triangleCord.array[0].x, triangleCord.array[0].y,
+     triangleCord.array[1].x, triangleCord.array[1].y,
+     triangleCord.array[2].x, triangleCord.array[2].y);
+  printf ("The centroid is [%4.2f, %4.2f]\n",
+	  centroid (triangleCord.array[0].x, triangleCord.array[1].x,
+		    triangleCord.array[2].x),
+	  centroid (triangleCord.array[0].y, triangleCord.array[1].y,
+		    triangleCord.array[2].y));
+}
+
+float
+centroid (float coordinate1, float coordinate2, float coordinate3)
+{
+  float centroidPoint;
+  centroidPoint = (coordinate1 + coordinate2 + coordinate3) / 3;
+  return centroidPoint;
+}
+% gcc125 hw11.c
+% a.out hw11.c
+The triangle vertices are [0.84, 0.39], [0.78, 0.80], and [0.91, 0.20]
+The centroid is [0.84, 0.46]
+% exit
+exit
+
+Script done on Fri Nov 18 20:52:29 2016
