@@ -1,0 +1,147 @@
+Script started on Thu Sep 29 15:06:06 2016
+% cat hw5.c
+/***********************************************************************************************************
+*Zachary Davis
+*CS125
+*Assignment #5
+*
+*Summary:
+*This program has the user enter a string of a and b in lower and upper case. The program tells user how many
+*a's, b's, B's, A's, and everything else there was inputed. 
+************************************************************************************************************/
+
+# include<stdio.h>
+main ()
+{
+
+  int aCount = 0, aOverallCount = 0, bCount = 0, bOverallCount =
+    0, noneCount = 0;
+  char abABString, aMultiple, bMultiple, upperAMultiple, upperBMultiple,
+    noneMultiple;
+
+/*************************************************************************************************************
+*All the different Multpile char variables are to be used to determine weather a 's' is printed for each count.
+**************************************************************************************************************/
+
+  printf
+    ("Enter your string of 'a's and 'b's in mixed upper and lowercase:\n");
+  scanf ("%c", &abABString);
+
+  do
+    {
+      switch (abABString)
+	{
+	case ('a'):
+	  aCount += 1;
+	case ('A'):
+	  aOverallCount += 1;
+	  printf (" ");
+	  break;
+
+/****************************************************
+*Case that counts all the a's inputed, only one break.
+*Space printed under all a inputs.
+*****************************************************/
+
+	case ('b'):
+	  bCount += 1;
+	case ('B'):
+	  bOverallCount += 1;
+	  printf (" ");
+	  break;
+
+/****************************************************
+*Case that counts all the b's inputed, only one break.
+*Space printed under all b inputs.
+*****************************************************/
+	case ('\n'):
+	  break;
+
+	default:
+	  noneCount += 1;
+	  printf ("^");
+
+/************************************************************
+*Case to count all other inputs. ^ printed under all mistakes.
+*************************************************************/
+	}
+      scanf ("%c", &abABString);
+    }
+  while (abABString != '\n');
+
+/******************************************
+*Two scanf's inorder to get right nonCount.
+******************************************/
+
+  switch (aCount)
+    {
+    case (1):
+      aMultiple = ' ';
+      break;
+    default:
+      aMultiple = 's';
+    }
+
+  switch (bCount)
+    {
+    case (1):
+      bMultiple = ' ';
+      break;
+    default:
+      bMultiple = 's';
+    }
+
+  switch ((aOverallCount - aCount))
+    {
+    case (1):
+      upperAMultiple = ' ';
+      break;
+    default:
+      upperAMultiple = 's';
+    }
+
+  switch ((bOverallCount - bCount))
+    {
+    case (1):
+      upperBMultiple = ' ';
+      break;
+    default:
+      upperBMultiple = 's';
+    }
+
+  switch (noneCount)
+    {
+    case (1):
+      noneMultiple = ' ';
+      break;
+    default:
+      noneMultiple = 's';
+    }
+
+/*****************************************************************************************************************
+*Five switches above are for each counter and to determine if there are more than one in order to print 's' or not.
+******************************************************************************************************************/
+
+  printf ("\nYour input contained %d mistake%c, as shown above\n", noneCount,
+	  noneMultiple);
+  printf ("Your input contained %d 'A'%c, %d 'a'%c, %d 'B'%c, and %d 'b'%c\n",
+	  (aOverallCount - aCount), upperAMultiple, aCount, aMultiple,
+	  (bOverallCount - bCount), upperBMultiple, bCount, bMultiple);
+}
+% gcc125 hw5.c
+% a.out hw5.c
+Enter your string of 'a's and 'b's in mixed upper and lowercase:
+xaaBbAAAzdbbbbb
+^       ^^     
+Your input contained 3 mistakes, as shown above
+Your input contained 3 'A's, 2 'a's, 1 'B' , and 6 'b's
+% a.out hw5.c
+Enter your string of 'a's and 'b's in mixed upper and lowercase:
+
+
+Your input contained 0 mistakes, as shown above
+Your input contained 0 'A's, 0 'a's, 0 'B's, and 0 'b's
+% exit
+exit
+
+Script done on Thu Sep 29 15:08:30 2016
