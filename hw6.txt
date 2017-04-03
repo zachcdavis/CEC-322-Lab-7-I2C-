@@ -1,0 +1,69 @@
+Script started on Thu Oct  6 15:20:32 2016
+% cat hw6.c
+/******************************************************************************************************
+*Zachary Davis
+*CS125
+*Assignment #6
+*
+*Summary:
+*This program has the user enter a string and the program pritns out each character with the character's 
+*hex value, decimal value, binary value and bit set count.
+*******************************************************************************************************/
+
+# include<stdio.h>
+main ()
+{
+  int bitShifter, count, bitValue;
+  char stringInput;
+
+  printf ("Enter a line of text: ");
+
+/***********************************************
+*While loop to read each character in the string.
+***********************************************/
+
+  while (stringInput != '\n')
+    {
+      scanf ("%c", &stringInput);
+      if (stringInput != '\n')
+	{
+	  printf
+	    ("\nThe ASCII code for '%c' is %#x in hex, %d in decimal, or ",
+	     stringInput, stringInput, stringInput);
+
+/******************************************************
+*For loop for shifting bits in character to read value.
+******************************************************/
+
+	  for (bitShifter = 0, count = 0; bitShifter < 8; bitShifter++)
+	    {
+	      bitValue = !!((stringInput << bitShifter) & 128);
+	      printf ("%d", bitValue);
+	      if (bitValue == 1)
+		count = count + 1;
+	    }
+	  printf (" in binary, %d bits were set.", count);
+	}
+    }
+  printf ("\n");
+}
+% gcc125 hw6.c
+% gcc125 hw6.c[12Dcat hw6.c[K[9Da.out hw6.c
+Enter a line of text: Hello there!
+
+The ASCII code for 'H' is 0x48 in hex, 72 in decimal, or 01001000 in binary, 2 bits were set.
+The ASCII code for 'e' is 0x65 in hex, 101 in decimal, or 01100101 in binary, 4 bits were set.
+The ASCII code for 'l' is 0x6c in hex, 108 in decimal, or 01101100 in binary, 4 bits were set.
+The ASCII code for 'l' is 0x6c in hex, 108 in decimal, or 01101100 in binary, 4 bits were set.
+The ASCII code for 'o' is 0x6f in hex, 111 in decimal, or 01101111 in binary, 6 bits were set.
+The ASCII code for ' ' is 0x20 in hex, 32 in decimal, or 00100000 in binary, 1 bits were set.
+The ASCII code for 't' is 0x74 in hex, 116 in decimal, or 01110100 in binary, 4 bits were set.
+The ASCII code for 'h' is 0x68 in hex, 104 in decimal, or 01101000 in binary, 3 bits were set.
+The ASCII code for 'e' is 0x65 in hex, 101 in decimal, or 01100101 in binary, 4 bits were set.
+The ASCII code for 'r' is 0x72 in hex, 114 in decimal, or 01110010 in binary, 4 bits were set.
+The ASCII code for 'e' is 0x65 in hex, 101 in decimal, or 01100101 in binary, 4 bits were set.
+The ASCII code for '!' is 0x21 in hex, 33 in decimal, or 00100001 in binary, 2 bits were set.
+% exit
+exit
+
+Script done on Thu Oct  6 15:21:06 2016
